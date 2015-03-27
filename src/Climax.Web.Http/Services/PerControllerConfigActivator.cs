@@ -10,10 +10,23 @@ namespace Climax.Web.Http.Services
 {
     public class PerControllerConfigActivator : IHttpControllerActivator
     {
-        private static readonly DefaultHttpControllerActivator Default = new DefaultHttpControllerActivator();
+        private readonly IHttpControllerActivator _innerActivator;
 
         private readonly ConcurrentDictionary<Type, HttpConfiguration> _cache =
             new ConcurrentDictionary<Type, HttpConfiguration>();
+
+        public PerControllerConfigActivator() : this(new DefaultHttpControllerActivator())
+        {}
+
+        public PerControllerConfigActivator(IHttpControllerActivator innerActivator)
+        {
+            if (innerActivator == null)
+            {
+                throw new ArgumentNullException("innerActivator");
+            }
+
+            _innerActivator = innerActivator;
+        }
 
         public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor,
             Type controllerType)
@@ -34,7 +47,7 @@ namespace Climax.Web.Http.Services
                 }
             }
 
-            var result = Default.Create(request, controllerDescriptor, controllerType);
+            var result = _innerActivator.Create(request, controllerDescriptor, controllerType);
             return result;
         }
     }
