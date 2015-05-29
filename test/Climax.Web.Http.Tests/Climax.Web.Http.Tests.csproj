@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7ED19D2D-FD99-48A2-82A4-538E1C8DBD00}</ProjectGuid>
+    <ProjectGuid>{99C1EBF9-8CAC-42A5-9C5A-8F865F42C736}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Climax.Web.Http</RootNamespace>
-    <AssemblyName>Climax.Web.Http</AssemblyName>
+    <RootNamespace>Climax.Web.Http.Tests</RootNamespace>
+    <AssemblyName>Climax.Web.Http.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,9 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Should">
+      <HintPath>..\..\packages\Should.1.1.20\lib\Should.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,41 +63,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Binders\SimpleArrayModelBinder.cs" />
-    <Compile Include="Binders\SimpleArrayModelBinderProvider.cs" />
-    <Compile Include="Binders\StringArrayModelBinder.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="Constraints\EnumConstraint.cs" />
-    <Compile Include="Constraints\StringCollectionConstraint.cs" />
-    <Compile Include="DispositionType.cs" />
-    <Compile Include="Extensions\HttpConfigurationExtensions.cs" />
-    <Compile Include="Extensions\HttpRequestMessageExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="FallbackHeaderConstants.cs" />
-    <Compile Include="Filters\CheckModelStateAttribute.cs" />
-    <Compile Include="Filters\ModelNullCheckType.cs" />
-    <Compile Include="Handlers\HeadMessageHandler.cs" />
-    <Compile Include="Handlers\ThreadCultureMessageHandler.cs" />
+    <Compile Include="SimpleArrayModelBinderProviderTests.cs" />
+    <Compile Include="SimpleArrayModelBinderTests.cs" />
+    <Compile Include="StringCollectionConstraintTests.cs" />
+    <Compile Include="EnumConstraintTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Results\FileHttpActionResult.cs" />
-    <Compile Include="MediaTypes.cs" />
-    <Compile Include="Results\FileWithDispositionHttpActionResult.cs" />
-    <Compile Include="Results\PlainTextResult.cs" />
-    <Compile Include="Services\CentralizedPrefixProvider.cs" />
-    <Compile Include="Services\NonControllerHttpControllerTypeResolver.cs" />
-    <Compile Include="Services\InjectAttribute.cs" />
-    <Compile Include="Services\InjectParameterBinding.cs" />
-    <Compile Include="Services\JsonContentNegotiator.cs" />
-    <Compile Include="Services\RouteDataValuesOnlyAttribute.cs" />
-    <Compile Include="Services\PerControllerConfigActivator.cs" />
-    <Compile Include="Services\SmartHttpActionInvoker.cs" />
-    <Compile Include="Services\Versioning\IVersionParser.cs" />
-    <Compile Include="Services\Versioning\VersionedRouteAttribute.cs" />
-    <Compile Include="Services\Versioning\VersionConstraint.cs" />
-    <Compile Include="Services\Versioning\VersionParser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <ProjectReference Include="..\..\src\Climax.Web.Http\Climax.Web.Http.csproj">
+      <Project>{7ed19d2d-fd99-48a2-82a4-538e1c8dbd00}</Project>
+      <Name>Climax.Web.Http</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
