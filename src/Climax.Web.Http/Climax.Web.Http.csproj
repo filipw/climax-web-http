@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binders\SimpleArrayModelBinder.cs" />
+    <Compile Include="Binders\SimpleArrayModelBinderProvider.cs" />
     <Compile Include="Binders\StringArrayModelBinder.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Constraints\EnumConstraint.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="MediaTypes.cs" />
     <Compile Include="Results\FileWithDispositionHttpActionResult.cs" />
     <Compile Include="Results\PlainTextResult.cs" />
+    <Compile Include="Services\CentralizedPrefixProvider.cs" />
     <Compile Include="Services\NonControllerHttpControllerTypeResolver.cs" />
     <Compile Include="Services\InjectAttribute.cs" />
     <Compile Include="Services\InjectParameterBinding.cs" />

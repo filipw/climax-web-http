@@ -63,6 +63,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SimpleArrayModelBinderProviderTests.cs" />
+    <Compile Include="SimpleArrayModelBinderTests.cs" />
     <Compile Include="StringCollectionConstraintTests.cs" />
     <Compile Include="EnumConstraintTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

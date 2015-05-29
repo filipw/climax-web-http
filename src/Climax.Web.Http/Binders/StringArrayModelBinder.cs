@@ -4,6 +4,7 @@ using System.Web.Http.ModelBinding;
 
 namespace Climax.Web.Http.Binders
 {
+    [Obsolete("Please use SimpleArrayModelBinder instead.")]
     public class StringArrayModelBinder : IModelBinder
     {
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
