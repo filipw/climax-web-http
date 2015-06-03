@@ -1,3 +1,6 @@
+### 1.2.0
+* Added robust CORS configuration helpers
+
 ### 1.1.0
 * Added support for a nested activator in `PerControllerConfigActivator`
 * Added `StringCollectionConstraint` and `EnumConstraint` which can be used as custom route constraints.
