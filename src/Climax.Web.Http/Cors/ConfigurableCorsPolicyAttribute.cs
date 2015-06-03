@@ -11,30 +11,15 @@ namespace Climax.Web.Http.Cors
 {
     public class ConfigurableCorsPolicyAttribute : Attribute, ICorsPolicyProvider
     {
-        private CorsSection _corsSection;
-
-        internal CorsSection CorsSection
-        {
-            get
-            {
-                if (_corsSection == null)
-                {
-                    _corsSection = ConfigurationManager.GetSection("cors") as CorsSection;
-                }
-                return _corsSection;
-            }
-            set { _corsSection = value; }
-        }
-
         private readonly CorsPolicy _policy;
 
-        public ConfigurableCorsPolicyAttribute(string name)
+        internal ConfigurableCorsPolicyAttribute(string name, CorsSection corsSection)
         {
             _policy = new CorsPolicy();
 
-            if (_corsSection != null)
+            if (corsSection != null)
             {
-                var policy = _corsSection.CorsPolicies.Cast<CorsElement>().FirstOrDefault(x => x.Name == name);
+                var policy = corsSection.CorsPolicies.Cast<CorsElement>().FirstOrDefault(x => x.Name == name);
                 if (policy != null)
                 {
                     if (policy.Headers == "*")
@@ -65,6 +50,12 @@ namespace Climax.Web.Http.Cors
                     }
                 }
             }
+        }
+
+        public ConfigurableCorsPolicyAttribute(string name)
+            : this(name, ConfigurationManager.GetSection("cors") as CorsSection)
+        {
+
         }
 
         public Task<CorsPolicy> GetCorsPolicyAsync(HttpRequestMessage request, CancellationToken cancellationToken)

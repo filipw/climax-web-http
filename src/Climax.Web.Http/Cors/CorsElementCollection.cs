@@ -1,4 +1,5 @@
 using System.Configuration;
+using System.Reflection;
 
 namespace Climax.Web.Http.Cors
 {
@@ -13,6 +14,21 @@ namespace Climax.Web.Http.Cors
         protected override object GetElementKey(ConfigurationElement element)
         {
             return ((CorsElement)element).Name;
+        }
+
+        internal void Add(CorsElement element)
+        {
+            BaseAdd(element);
+        }
+
+        public override bool IsReadOnly()
+        {
+            if (Assembly.GetCallingAssembly().GetName().Name == "Climax.Web.Http.Tests")
+            {
+                return false;
+            }
+
+            return base.IsReadOnly();
         }
     }
 }
